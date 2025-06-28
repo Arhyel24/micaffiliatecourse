@@ -17,11 +17,17 @@ export default function CTASection() {
   return (
     <section className="py-20 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
-      
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"
+        }}
+      />
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
+          {/* Left Column */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -41,7 +47,7 @@ export default function CTASection() {
                 {" "}Success Journey?
               </span>
             </motion.h2>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -54,7 +60,7 @@ export default function CTASection() {
               is just one click away.
             </motion.p>
 
-            {/* Urgency Elements */}
+            {/* Urgency */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -72,7 +78,7 @@ export default function CTASection() {
               </div>
             </motion.div>
 
-            {/* CTA Buttons */}
+            {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -85,8 +91,8 @@ export default function CTASection() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold px-8 py-4 rounded-full 
-                           hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 
-                           flex items-center justify-center shadow-2xl"
+                             hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 
+                             flex items-center justify-center shadow-2xl"
                 >
                   View All Courses
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -95,7 +101,7 @@ export default function CTASection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Benefits */}
+          {/* Right Column */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -106,7 +112,7 @@ export default function CTASection() {
             <h3 className="text-2xl font-bold text-white mb-6">
               What You Get When You Join:
             </h3>
-            
+
             <div className="space-y-4">
               {benefits.map((benefit, index) => (
                 <motion.div
@@ -123,7 +129,7 @@ export default function CTASection() {
               ))}
             </div>
 
-            {/* Guarantee Badge */}
+            {/* Guarantee */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}

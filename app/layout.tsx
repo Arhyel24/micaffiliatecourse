@@ -37,7 +37,7 @@ export default function RootLayout({
       <Flowbite theme={{ theme: flowbiteTheme }}>
         <AppProvider>
           <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200`}
+            className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200 overflow-x-hidden`}
           >
             <SpeedInsights />
             <div className="h-full">

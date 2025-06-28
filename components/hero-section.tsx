@@ -9,8 +9,14 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
-      
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+        }}
+      ></div>
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
           {/* Left Content */}
@@ -31,7 +37,7 @@ export default function HeroSection() {
               <span className="text-sm font-medium">Trusted by 10,000+ Students</span>
             </motion.div>
 
-            {/* Main Heading */}
+            {/* Heading */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -78,7 +84,7 @@ export default function HeroSection() {
               </div>
             </motion.div>
 
-            {/* CTA Buttons */}
+            {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -90,19 +96,19 @@ export default function HeroSection() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold px-8 py-4 rounded-full 
-                           hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 
-                           flex items-center justify-center shadow-2xl"
+                             hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 
+                             flex items-center justify-center shadow-2xl"
                 >
                   Start Learning Now
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </motion.button>
               </Link>
-              
+
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="border-2 border-white/30 text-white font-semibold px-8 py-4 rounded-full 
-                         hover:bg-white/10 transition-all duration-300 flex items-center justify-center backdrop-blur-sm"
+                           hover:bg-white/10 transition-all duration-300 flex items-center justify-center backdrop-blur-sm"
               >
                 <Play className="mr-2 w-5 h-5" />
                 Watch Preview
@@ -110,7 +116,7 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Hero Image/Video */}
+          {/* Right Content */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -118,22 +124,21 @@ export default function HeroSection() {
             className="relative"
           >
             <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
-              {/* Coach Adams Image */}
               <div className="relative w-full h-96 rounded-2xl overflow-hidden mb-6">
                 <Image
                   src="https://i.ibb.co/pnNBqgp/IMG-20241209-131541.jpg"
                   alt="Coach Adams"
                   fill
+                  priority
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">
                   <h3 className="text-xl font-bold">Coach Adams</h3>
                   <p className="text-blue-200">Affiliate Marketing Expert</p>
                 </div>
               </div>
 
-              {/* Achievement Cards */}
               <div className="grid grid-cols-2 gap-4">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -152,7 +157,7 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* Floating Elements */}
+            {/* Floating Icons */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity }}
@@ -160,7 +165,7 @@ export default function HeroSection() {
             >
               <Star className="w-6 h-6" />
             </motion.div>
-            
+
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 4, repeat: Infinity }}
@@ -170,21 +175,21 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
         </div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60"
-      >
-        <div className="flex flex-col items-center">
-          <span className="text-sm mb-2">Scroll to explore</span>
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/60 rounded-full mt-2"></div>
+        {/* Scroll Indicator */}
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60"
+        >
+          <div className="flex flex-col items-center">
+            <span className="text-sm mb-2">Scroll to explore</span>
+            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-white/60 rounded-full mt-2"></div>
+            </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   )
   );
