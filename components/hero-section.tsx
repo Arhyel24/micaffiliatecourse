@@ -126,7 +126,7 @@ export default function HeroSection() {
             <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
               <div className="relative w-full h-96 rounded-2xl overflow-hidden mb-6">
                 <Image
-                  src="https://i.ibb.co/pnNBqgp/IMG-20241209-131541.jpg"
+                  src="https://i.ibb.co/tPJsY4hV/Whats-App-Image-2025-06-28-at-9-57-24-PM.jpg"
                   alt="Coach Adams"
                   fill
                   priority

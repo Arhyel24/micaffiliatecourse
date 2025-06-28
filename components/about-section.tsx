@@ -52,7 +52,7 @@ export default function AboutSection() {
                 className="relative w-full h-96 rounded-2xl overflow-hidden shadow-2xl"
               >
                 <Image
-                  src="https://i.ibb.co/pnNBqgp/IMG-20241209-131541.jpg"
+                  src="https://i.ibb.co/tPJsY4hV/Whats-App-Image-2025-06-28-at-9-57-24-PM.jpg"
                   alt="Coach Adams"
                   fill
                   className="object-cover"

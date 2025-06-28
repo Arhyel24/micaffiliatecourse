@@ -77,15 +77,13 @@ export function ChapterVideo({
         </div>
       </motion.div> */}
 
-      {/* Quality Badge */}
-      <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-lg px-3 py-1">
+      {/* <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-lg px-3 py-1">
         <span className="text-white text-xs font-medium">HD</span>
       </div>
 
-      {/* Chapter Badge */}
       <div className="absolute top-4 left-4 bg-blue-600/90 backdrop-blur-sm rounded-lg px-3 py-1">
         <span className="text-white text-xs font-medium">Chapter Video</span>
-      </div>
+      </div> */}
     </div>
   );
 }
