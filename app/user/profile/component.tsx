@@ -3,12 +3,23 @@
 import { useState } from "react";
 import Image from "next/image";
 import toast from "react-hot-toast";
-import { Label, TextInput } from "flowbite-react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { 
+  User, 
+  Mail, 
+  Camera, 
+  Lock, 
+  Save, 
+  Eye, 
+  EyeOff, 
+  Upload,
+  CheckCircle,
+  AlertCircle
+} from "lucide-react";
 import LoadingRing from "@/components/loading-ring";
 import { isSquareImage } from "@/actions/is-sqaure";
 
-// Add type for user
 interface User {
   email: string;
   username?: string;
@@ -26,6 +37,9 @@ export default function ProfileComp({ user }) {
   const [userLoading, setUserLoading] = useState(false);
   const [uploadError, setUploadError] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
   const apiKey = process.env.NEXT_PUBLIC_IMGBB_APIKEY as string;
   const imgApiUrl = process.env.NEXT_PUBLIC_IMGBB_URL as string;
@@ -33,26 +47,22 @@ export default function ProfileComp({ user }) {
   const router = useRouter();
 
   const uploadToImgBB = async (file: File): Promise<string | null> => {
-    // Validate API configuration
     if (!apiKey || !imgApiUrl) {
       setUploadError("Image upload service is not configured");
       return null;
     }
 
-    // Validate file
     if (!file) {
       setUploadError("No file selected");
       return null;
     }
 
-    // File size validation
-    const maxSizeInBytes = 5 * 1024 * 1024; // 5MB
+    const maxSizeInBytes = 5 * 1024 * 1024;
     if (file.size > maxSizeInBytes) {
       toast.error("File size exceeds 5MB limit");
       return null;
     }
 
-    // Allowed image types
     const allowedTypes = [
       "image/jpeg",
       "image/jpg",
@@ -82,7 +92,6 @@ export default function ProfileComp({ user }) {
 
       const data = await response.json();
 
-      // Validate response
       if (!data?.data?.url) {
         setUploadError("Invalid response from image upload service");
         return null;
@@ -102,7 +111,6 @@ export default function ProfileComp({ user }) {
     setUserLoading(true);
 
     try {
-      // Prepare update payload
       const updatePayload: {
         email: string;
         username: string;
@@ -112,18 +120,15 @@ export default function ProfileComp({ user }) {
         username: username.trim() || user.name,
       };
 
-      // Upload image if file exists
       if (imageFile) {
         const imgUrl = await uploadToImgBB(imageFile);
         if (imgUrl) {
           updatePayload.imageUrl = imgUrl;
         } else {
-          // Image upload failed, but continue with user update
           toast.error("Image upload failed, but will update other details");
         }
       }
 
-      // Send update request
       const response = await fetch("/api/update-user", {
         method: "POST",
         headers: {
@@ -136,16 +141,14 @@ export default function ProfileComp({ user }) {
 
       if (response.ok) {
         toast.success(data.message || "Profile updated successfully!");
-        router.refresh(); // Refresh to get updated data
+        router.refresh();
       } else {
-        // Handle server-side validation errors
         setUploadError(data.message || "Failed to update profile");
         toast.error(data.message || "Update failed");
       }
     } catch (error) {
       console.error("User update error:", error);
 
-      // Differentiate error types
       if (error instanceof Error) {
         setError(error.message);
         toast.error(error.message);
@@ -164,21 +167,18 @@ export default function ProfileComp({ user }) {
     setError("");
     setIsLoading(true);
 
-    // Client-side validation
     if (!oldPassword || !newPassword || !repeatPassword) {
       setError("All fields are required");
       setIsLoading(false);
       return;
     }
 
-    // Validate passwords
     if (newPassword !== repeatPassword) {
       setError("Passwords do not match");
       setIsLoading(false);
       return;
     }
 
-    // Optional: Additional password strength validation
     if (newPassword.length < 8) {
       setError("Password must be at least 8 characters long");
       setIsLoading(false);
@@ -220,7 +220,6 @@ export default function ProfileComp({ user }) {
     }
   };
 
-  // Handle image file selection
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
@@ -235,7 +234,6 @@ export default function ProfileComp({ user }) {
 
       setImageFile(file);
 
-      // Create image preview
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
@@ -245,185 +243,279 @@ export default function ProfileComp({ user }) {
   };
 
   return (
-    <div className="p-6 md:p-10 max-w-2xl mx-auto">
-      {/* User Details Section */}
-      <div className="flex flex-col items-center bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 mt-20 w-full mb-6">
-        {imagePreview ? (
-          <div className="mt-2">
-            <Image
-              src={imagePreview}
-              alt="Preview"
-              width={100}
-              height={100}
-              className="rounded-full mb-4"
-            />
-          </div>
-        ) : (
-          <Image
-            src={user.image}
-            alt="User  Avatar"
-            width={100}
-            height={100}
-            className="rounded-full mb-4"
-          />
-        )}
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-          {user.name}
-        </h2>
-        <p className="text-md font-semibold text-gray-900 dark:text-gray-100">
-          {user.email}
-        </p>
-        <form className="mt-4 w-full" onSubmit={updateUser} autoComplete="off">
-          <div className="flex w-full items-center justify-center">
-            <Label
-              htmlFor="dropzone-file"
-              className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-            >
-              <div className="flex flex-col items-center justify-center pb-6 pt-5">
-                <svg
-                  className="mb-4 h-8 w-8 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 16"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                  />
-                </svg>
-                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Click to upload</span> or drag
-                  and drop
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  SVG, PNG, JPG or GIF (MAX. 5MB) & aspect ratio: 1/1
-                </p>
-              </div>
-              <input
-                id="dropzone-file"
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleImageChange}
-                disabled={userLoading}
-              />
-            </Label>
-          </div>
-
-          <div className="mt-4">
-            <label
-              htmlFor="username"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Username
-            </label>
-            <TextInput
-              autoComplete="off"
-              id="username"
-              placeholder={user.name}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          {uploadError && (
-            <div className="text-red-500 text-sm">{uploadError}</div>
-          )}
-          <button
-            type="submit"
-            className={`mt-6 w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center justify-center ${
-              userLoading && "cursor-not-allowed"
-            }`}
-          >
-            {userLoading ? (
-              <>
-                <LoadingRing size="sm" /> Updating user
-              </>
-            ) : (
-              "Update User Details"
-            )}
-          </button>
-        </form>
-      </div>
-
-      {/* Change Password Section */}
-      <div className="flex flex-col items-center bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 w-full">
-        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
-          Change Password
-        </h3>
-        <form
-          className="w-full"
-          onSubmit={handlePasswordChange}
-          autoComplete="off"
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8"
         >
-          <div className="mt-4">
-            <label
-              htmlFor="new-password"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Old Password
-            </label>
-            <input
-              type="password"
-              autoComplete="off"
-              id="old-password"
-              value={oldPassword}
-              onChange={(e) => setOldPassword(e.target.value)}
-              required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          <div className="mt-4">
-            <label
-              htmlFor="new-password"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              New Password
-            </label>
-            <input
-              type="password"
-              autoComplete="off"
-              id="new-password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          <div className="mt-4">
-            <label
-              htmlFor="repeat-password"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Repeat Password
-            </label>
-            <input
-              type="password"
-              id="repeat-password"
-              value={repeatPassword}
-              onChange={(e) => setRepeatPassword(e.target.value)}
-              required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          {error && <p className="text-red-500 mt-2">{error}</p>}
-          <button
-            type="submit"
-            className="mt-6 w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center justify-center"
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Profile Settings
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300">
+            Manage your account information and security settings
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Profile Information */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-8"
           >
-            {isLoading ? (
-              <>
-                <LoadingRing size="sm" className="mr-2" /> Changing password
-              </>
-            ) : (
-              "Update Password"
-            )}
-          </button>
-        </form>
+            <div className="flex items-center mb-6">
+              <User className="w-6 h-6 text-blue-600 mr-3" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                Profile Information
+              </h2>
+            </div>
+
+            {/* Profile Picture */}
+            <div className="text-center mb-8">
+              <div className="relative inline-block">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-200 dark:border-gray-600 mb-4">
+                  <Image
+                    src={imagePreview || user.image}
+                    alt="Profile"
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute bottom-4 right-0 bg-blue-600 rounded-full p-2 cursor-pointer hover:bg-blue-700 transition-colors">
+                  <Camera className="w-4 h-4 text-white" />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
+                {user.name}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">{user.email}</p>
+            </div>
+
+            <form onSubmit={updateUser} className="space-y-6">
+              {/* Image Upload */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Profile Picture
+                </label>
+                <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-6 text-center hover:border-blue-500 transition-colors">
+                  <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                    Click to upload or drag and drop
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-500">
+                    PNG, JPG, GIF up to 5MB (Square images only)
+                  </p>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="hidden"
+                    id="image-upload"
+                    disabled={userLoading}
+                  />
+                  <label
+                    htmlFor="image-upload"
+                    className="mt-3 inline-block bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-700 transition-colors"
+                  >
+                    Choose File
+                  </label>
+                </div>
+              </div>
+
+              {/* Username */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Username
+                </label>
+                <input
+                  type="text"
+                  placeholder={user.name}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg 
+                           bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                           focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  disabled={userLoading}
+                />
+              </div>
+
+              {uploadError && (
+                <div className="flex items-center p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                  <AlertCircle className="w-5 h-5 text-red-500 mr-2" />
+                  <span className="text-red-700 dark:text-red-400 text-sm">{uploadError}</span>
+                </div>
+              )}
+
+              <motion.button
+                whileHover={{ scale: userLoading ? 1 : 1.02 }}
+                whileTap={{ scale: userLoading ? 1 : 0.98 }}
+                type="submit"
+                disabled={userLoading}
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-4 rounded-lg 
+                         hover:from-blue-700 hover:to-purple-700 transition-all duration-300 
+                         disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              >
+                {userLoading ? (
+                  <>
+                    <LoadingRing size="sm" />
+                    <span className="ml-2">Updating...</span>
+                  </>
+                ) : (
+                  <>
+                    <Save className="w-5 h-5 mr-2" />
+                    Update Profile
+                  </>
+                )}
+              </motion.button>
+            </form>
+          </motion.div>
+
+          {/* Password Change */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-8"
+          >
+            <div className="flex items-center mb-6">
+              <Lock className="w-6 h-6 text-blue-600 mr-3" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                Change Password
+              </h2>
+            </div>
+
+            <form onSubmit={handlePasswordChange} className="space-y-6">
+              {/* Current Password */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Current Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showOldPassword ? "text" : "password"}
+                    value={oldPassword}
+                    onChange={(e) => setOldPassword(e.target.value)}
+                    className="w-full px-4 py-3 pr-12 border border-gray-300 dark:border-gray-600 rounded-lg 
+                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                             focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    disabled={isLoading}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowOldPassword(!showOldPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    disabled={isLoading}
+                  >
+                    {showOldPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+              </div>
+
+              {/* New Password */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  New Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showNewPassword ? "text" : "password"}
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className="w-full px-4 py-3 pr-12 border border-gray-300 dark:border-gray-600 rounded-lg 
+                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                             focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    disabled={isLoading}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    disabled={isLoading}
+                  >
+                    {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Confirm Password */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Confirm New Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showRepeatPassword ? "text" : "password"}
+                    value={repeatPassword}
+                    onChange={(e) => setRepeatPassword(e.target.value)}
+                    className="w-full px-4 py-3 pr-12 border border-gray-300 dark:border-gray-600 rounded-lg 
+                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                             focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    disabled={isLoading}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowRepeatPassword(!showRepeatPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    disabled={isLoading}
+                  >
+                    {showRepeatPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+              </div>
+
+              {error && (
+                <div className="flex items-center p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                  <AlertCircle className="w-5 h-5 text-red-500 mr-2" />
+                  <span className="text-red-700 dark:text-red-400 text-sm">{error}</span>
+                </div>
+              )}
+
+              <motion.button
+                whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                whileTap={{ scale: isLoading ? 1 : 0.98 }}
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold py-3 px-4 rounded-lg 
+                         hover:from-green-700 hover:to-blue-700 transition-all duration-300 
+                         disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              >
+                {isLoading ? (
+                  <>
+                    <LoadingRing size="sm" />
+                    <span className="ml-2">Updating Password...</span>
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle className="w-5 h-5 mr-2" />
+                    Update Password
+                  </>
+                )}
+              </motion.button>
+            </form>
+
+            {/* Password Requirements */}
+            <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+              <h4 className="text-sm font-medium text-blue-900 dark:text-blue-300 mb-2">
+                Password Requirements:
+              </h4>
+              <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1">
+                <li>• At least 8 characters long</li>
+                <li>• Contains uppercase and lowercase letters</li>
+                <li>• Contains at least one number</li>
+                <li>• Contains at least one special character</li>
+              </ul>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
