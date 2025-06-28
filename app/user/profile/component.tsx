@@ -5,17 +5,17 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { 
-  User, 
-  Mail, 
-  Camera, 
-  Lock, 
-  Save, 
-  Eye, 
-  EyeOff, 
+import {
+  User,
+  Mail,
+  Camera,
+  Lock,
+  Save,
+  Eye,
+  EyeOff,
   Upload,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
 } from "lucide-react";
 import LoadingRing from "@/components/loading-ring";
 import { isSquareImage } from "@/actions/is-sqaure";
@@ -266,7 +266,7 @@ export default function ProfileComp({ user }) {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-8"
+            className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-8"
           >
             <div className="flex items-center mb-6">
               <User className="w-6 h-6 text-blue-600 mr-3" />
@@ -348,7 +348,9 @@ export default function ProfileComp({ user }) {
               {uploadError && (
                 <div className="flex items-center p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
                   <AlertCircle className="w-5 h-5 text-red-500 mr-2" />
-                  <span className="text-red-700 dark:text-red-400 text-sm">{uploadError}</span>
+                  <span className="text-red-700 dark:text-red-400 text-sm">
+                    {uploadError}
+                  </span>
                 </div>
               )}
 
@@ -381,7 +383,7 @@ export default function ProfileComp({ user }) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-8"
+            className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-8"
           >
             <div className="flex items-center mb-6">
               <Lock className="w-6 h-6 text-blue-600 mr-3" />
@@ -467,7 +469,11 @@ export default function ProfileComp({ user }) {
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
                     disabled={isLoading}
                   >
-                    {showRepeatPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    {showRepeatPassword ? (
+                      <EyeOff size={20} />
+                    ) : (
+                      <Eye size={20} />
+                    )}
                   </button>
                 </div>
               </div>
@@ -475,7 +481,9 @@ export default function ProfileComp({ user }) {
               {error && (
                 <div className="flex items-center p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
                   <AlertCircle className="w-5 h-5 text-red-500 mr-2" />
-                  <span className="text-red-700 dark:text-red-400 text-sm">{error}</span>
+                  <span className="text-red-700 dark:text-red-400 text-sm">
+                    {error}
+                  </span>
                 </div>
               )}
 

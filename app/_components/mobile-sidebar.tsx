@@ -15,7 +15,7 @@ export const MobileSidebar = () => {
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="bg-white dark:bg-gray-800 p-0 
+        className="bg-white dark:bg-gray-900 p-0 
     border-r border-gray-200 dark:border-gray-700"
       >
         <SideBar />

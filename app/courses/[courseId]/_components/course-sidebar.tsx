@@ -51,7 +51,7 @@ export default function CourseSidebar({ progressCount }: CourseSidebarProps) {
 
   if (loading) {
     return (
-      <div className="flex h-full flex-col bg-white dark:bg-gray-800">
+      <div className="flex h-full flex-col bg-white dark:bg-gray-900">
         <div className="p-8 border-b border-gray-200 dark:border-gray-700">
           <div className="animate-pulse">
             <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
@@ -70,7 +70,7 @@ export default function CourseSidebar({ progressCount }: CourseSidebarProps) {
   }
 
   return (
-    <div className="flex h-full flex-col bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
+    <div className="flex h-full flex-col bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 md:pt-20">
       {/* Course Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -94,26 +94,14 @@ export default function CourseSidebar({ progressCount }: CourseSidebarProps) {
         {/* Progress Section */}
         <div className="space-y-3">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-600 dark:text-gray-400">Your Progress</span>
+            <span className="text-gray-600 dark:text-gray-400">
+              Your Progress
+            </span>
             <span className="font-semibold text-gray-900 dark:text-white">
               {progressCount}%
             </span>
           </div>
           <CourseProgress variant="success" value={progressCount} />
-        </div>
-
-        {/* Course Stats */}
-        <div className="grid grid-cols-2 gap-3 mt-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-3 text-center border border-gray-200 dark:border-gray-700">
-            <Users className="w-4 h-4 text-blue-500 mx-auto mb-1" />
-            <div className="text-xs font-semibold text-gray-900 dark:text-white">10K+</div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">Students</div>
-          </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-3 text-center border border-gray-200 dark:border-gray-700">
-            <Star className="w-4 h-4 text-yellow-500 mx-auto mb-1" />
-            <div className="text-xs font-semibold text-gray-900 dark:text-white">4.9</div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">Rating</div>
-          </div>
         </div>
       </motion.div>
 
@@ -125,7 +113,7 @@ export default function CourseSidebar({ progressCount }: CourseSidebarProps) {
             Course Content
           </h3>
         </div>
-        
+
         <div className="space-y-1">
           {chapters.map((chapter, index) => (
             <motion.div
@@ -147,7 +135,9 @@ export default function CourseSidebar({ progressCount }: CourseSidebarProps) {
         {chapters.length === 0 && (
           <div className="p-8 text-center">
             <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-            <p className="text-gray-500 dark:text-gray-400">No chapters available</p>
+            <p className="text-gray-500 dark:text-gray-400">
+              No chapters available
+            </p>
           </div>
         )}
       </div>

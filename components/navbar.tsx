@@ -4,16 +4,16 @@ import { Avatar, DarkThemeToggle, Dropdown, Navbar } from "flowbite-react";
 import { useState, useEffect } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Menu, 
-  X, 
-  User, 
-  Settings, 
-  LogOut, 
-  BookOpen, 
-  Users, 
+import {
+  Menu,
+  X,
+  User,
+  Settings,
+  LogOut,
+  BookOpen,
+  Users,
   BarChart3,
-  Home
+  Home,
 } from "lucide-react";
 import { isTeacher } from "@/lib/teacher";
 import Link from "next/link";
@@ -84,7 +84,7 @@ export function NavBar() {
                 <span>{item.label}</span>
               </Link>
             ))}
-            
+
             {isAdmin && (
               <>
                 {adminItems.map((item) => (
@@ -104,7 +104,7 @@ export function NavBar() {
           {/* Right Side */}
           <div className="flex items-center space-x-4">
             <DarkThemeToggle />
-            
+
             {!session ? (
               <Link href="/login">
                 <motion.button
@@ -123,7 +123,7 @@ export function NavBar() {
                   label={
                     <motion.div
                       whileHover={{ scale: 1.05 }}
-                      className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                      className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
                     >
                       <Avatar
                         alt="User settings"
@@ -154,31 +154,11 @@ export function NavBar() {
                     </span>
                   </Dropdown.Header>
                   
-                  <Dropdown.Item href="/" icon={Home}>
-                    Dashboard
-                  </Dropdown.Item>
-                  
-                  <Dropdown.Item href="/courses" icon={BookOpen}>
-                    Courses
-                  </Dropdown.Item>
-                  
-                  {isAdmin && (
-                    <>
-                      <Dropdown.Divider />
-                      <Dropdown.Item href="/view/admin" icon={Users}>
-                        Manage Users
-                      </Dropdown.Item>
-                      <Dropdown.Item href="/view/courses" icon={BarChart3}>
-                        Course Analytics
-                      </Dropdown.Item>
-                    </>
-                  )}
-                  
                   <Dropdown.Divider />
                   <Dropdown.Item href="/user/profile" icon={Settings}>
                     Profile Settings
                   </Dropdown.Item>
-                  
+
                   <Dropdown.Item onClick={() => signOut()} icon={LogOut}>
                     Sign out
                   </Dropdown.Item>
@@ -189,9 +169,13 @@ export function NavBar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
@@ -212,13 +196,13 @@ export function NavBar() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center space-x-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                    className="flex items-center space-x-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg transition-colors"
                   >
                     <item.icon className="w-5 h-5" />
                     <span className="font-medium">{item.label}</span>
                   </Link>
                 ))}
-                
+
                 {isAdmin && (
                   <>
                     <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
@@ -227,7 +211,7 @@ export function NavBar() {
                         key={item.href}
                         href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="flex items-center space-x-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                        className="flex items-center space-x-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg transition-colors"
                       >
                         <item.icon className="w-5 h-5" />
                         <span className="font-medium">{item.label}</span>
@@ -235,14 +219,14 @@ export function NavBar() {
                     ))}
                   </>
                 )}
-                
+
                 {session && (
                   <>
                     <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
                     <Link
                       href="/user/profile"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center space-x-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                      className="flex items-center space-x-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg transition-colors"
                     >
                       <Settings className="w-5 h-5" />
                       <span className="font-medium">Profile Settings</span>

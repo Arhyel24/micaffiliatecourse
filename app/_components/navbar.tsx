@@ -5,7 +5,7 @@ export const Navbar = () => {
   return (
     <div
       className="flex h-full items-center border-b 
-  bg-white dark:bg-gray-800 
+  bg-white dark:bg-gray-900 
   border-gray-200 dark:border-gray-700 
   p-4 shadow-sm dark:shadow-md 
   text-gray-900 dark:text-gray-100"

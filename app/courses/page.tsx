@@ -39,7 +39,9 @@ export default function CoursesPage() {
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20 flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-400">Loading courses...</p>
+            <p className="text-gray-600 dark:text-gray-400">
+              Loading courses...
+            </p>
           </div>
         </div>
       </>
@@ -61,7 +63,8 @@ export default function CoursesPage() {
             >
               Master Your
               <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-                {" "}Skills
+                {" "}
+                Skills
               </span>
             </motion.h1>
             <motion.p
@@ -70,10 +73,11 @@ export default function CoursesPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto"
             >
-              Choose from our comprehensive collection of courses designed to transform 
-              you into a successful digital entrepreneur. Start your journey today!
+              Choose from our comprehensive collection of courses designed to
+              transform you into a successful digital entrepreneur. Start your
+              journey today!
             </motion.p>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -109,8 +113,8 @@ export default function CoursesPage() {
                 Available Courses
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                Each course is carefully crafted to provide you with practical skills 
-                and proven strategies for success in the digital world.
+                Each course is carefully crafted to provide you with practical
+                skills and proven strategies for success in the digital world.
               </p>
             </motion.div>
 
@@ -135,7 +139,7 @@ export default function CoursesPage() {
                     whileHover={{ y: -10 }}
                     className="group"
                   >
-                    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden h-full transition-all duration-300 group-hover:shadow-2xl">
+                    <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden h-full transition-all duration-300 group-hover:shadow-2xl">
                       {/* Course Image */}
                       <div className="relative h-48 overflow-hidden">
                         <Image
@@ -158,7 +162,7 @@ export default function CoursesPage() {
                         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                           {course.title}
                         </h3>
-                        
+
                         <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
                           {course.description}
                         </p>
@@ -210,7 +214,8 @@ export default function CoursesPage() {
                 Ready to Start Learning?
               </h2>
               <p className="text-xl text-blue-100 mb-8">
-                Join thousands of successful students and start your transformation today.
+                Join thousands of successful students and start your
+                transformation today.
               </p>
               <motion.button
                 whileHover={{ scale: 1.05 }}

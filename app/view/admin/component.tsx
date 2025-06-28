@@ -208,7 +208,7 @@ export default function AdminComponent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 mb-8"
+              className="bg-white dark:bg-blue-900/20 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 mb-8"
             >
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
@@ -236,7 +236,7 @@ export default function AdminComponent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
+              className="bg-white dark:bg-blue-900/20 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
             >
               <div className="p-6 border-b border-gray-200 dark:border-gray-700">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">

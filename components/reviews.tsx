@@ -54,7 +54,7 @@ const Reviews: React.FC = () => {
         {reviewsData.map((review, index) => (
           <div
             key={index}
-            className="inline-block p-6 bg-white dark:bg-gray-800 max-w-[500px] h-[200px] border border-gray-200 dark:border-gray-700 shadow-lg rounded-lg transition-transform transform hover:scale-105 mx-2 text-wrap whitespace-normal"
+            className="inline-block p-6 bg-white dark:bg-gray-900 max-w-[500px] h-[200px] border border-gray-200 dark:border-gray-700 shadow-lg rounded-lg transition-transform transform hover:scale-105 mx-2 text-wrap whitespace-normal"
           >
             <div className="flex gap-4 items-start">
               <Image

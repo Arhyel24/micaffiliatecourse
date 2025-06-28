@@ -57,7 +57,7 @@ export default function CourseShell({
   return (
     <div className="h-screen bg-gray-50 dark:bg-gray-900 overflow-hidden">
       {/* Course Navbar - Fixed at top */}
-      <div className="fixed inset-x-0 top-0 z-50 h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+      <div className="fixed inset-x-0 top-0 z-50 h-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm">
         <div className="h-full md:pl-80">
           <CourseNavbar progressCount={progressCount} />
         </div>
@@ -69,10 +69,8 @@ export default function CourseShell({
       </div>
 
       {/* Main Content Area */}
-      <main className="h-full pt-16 md:pl-80 overflow-auto">
-        <div className="h-full">
-          {children}
-        </div>
+      <main className="h-full md:pl-80 overflow-auto">
+        <div className="h-full">{children}</div>
       </main>
     </div>
   );

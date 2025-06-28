@@ -13,17 +13,14 @@ export default function CourseMobileSidebar({
   return (
     <Sheet>
       <SheetTrigger className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <MenuIcon className="w-6 h-6 text-gray-700 dark:text-gray-200" />
         </motion.div>
       </SheetTrigger>
 
-      <SheetContent 
-        side="left" 
-        className="w-80 bg-white dark:bg-gray-800 p-0 border-r border-gray-200 dark:border-gray-700"
+      <SheetContent
+        side="left"
+        className="w-80 bg-white dark:bg-gray-900 p-0 border-r border-gray-200 dark:border-gray-700"
       >
         <CourseSidebar progressCount={progressCount} />
       </SheetContent>

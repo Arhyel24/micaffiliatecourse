@@ -8,7 +8,15 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { motion } from "framer-motion";
-import { Search, Trash2, User, Mail, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Search,
+  Trash2,
+  User,
+  Mail,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 export function UsersTable({ users }) {
   const [openModal, setOpenModal] = useState(false);
@@ -67,9 +75,9 @@ export function UsersTable({ users }) {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <div className="bg-white dark:bg-blue-900/20 shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
       {/* Search Header */}
-      <div className="p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+      <div className="p-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-blue-900/20">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white">
@@ -79,7 +87,7 @@ export function UsersTable({ users }) {
               {filteredUsers.length} of {users.length} users
             </p>
           </div>
-          
+
           {/* Search Input */}
           <div className="relative w-full sm:w-80">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -100,7 +108,7 @@ export function UsersTable({ users }) {
       <div className="overflow-x-auto">
         {paginatedUsers.length > 0 ? (
           <table className="w-full">
-            <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+            <thead className="bg-white dark:bg-blue-900/20 border-b border-gray-200 dark:border-gray-700">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   <div className="flex items-center">
@@ -125,7 +133,7 @@ export function UsersTable({ users }) {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+            <tbody className="bg-white dark:bg-blue-900/5 divide-y divide-gray-200 dark:divide-gray-700">
               {paginatedUsers.map((user, index) => (
                 <motion.tr
                   key={user.email}
@@ -147,7 +155,9 @@ export function UsersTable({ users }) {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900 dark:text-white">{user.email}</div>
+                    <div className="text-sm text-gray-900 dark:text-white">
+                      {user.email}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -179,7 +189,9 @@ export function UsersTable({ users }) {
               No users found
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              {searchQuery ? "Try adjusting your search terms" : "No users have been added yet"}
+              {searchQuery
+                ? "Try adjusting your search terms"
+                : "No users have been added yet"}
             </p>
           </div>
         )}
@@ -190,31 +202,33 @@ export function UsersTable({ users }) {
         <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
           <div className="flex items-center justify-between">
             <div className="text-sm text-gray-700 dark:text-gray-300">
-              Showing {startIndex + 1} to {Math.min(startIndex + usersPerPage, filteredUsers.length)} of {filteredUsers.length} results
+              Showing {startIndex + 1} to{" "}
+              {Math.min(startIndex + usersPerPage, filteredUsers.length)} of{" "}
+              {filteredUsers.length} results
             </div>
-            
+
             <div className="flex items-center space-x-2">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage(currentPage - 1)}
-                className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 <ChevronLeft className="w-4 h-4 mr-1" />
                 Previous
               </motion.button>
-              
+
               <span className="text-sm text-gray-700 dark:text-gray-300">
                 Page {currentPage} of {totalPages}
               </span>
-              
+
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 disabled={currentPage === totalPages}
                 onClick={() => setCurrentPage(currentPage + 1)}
-                className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 Next
                 <ChevronRight className="w-4 h-4 ml-1" />
@@ -241,19 +255,20 @@ export function UsersTable({ users }) {
               Delete User Account
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              Are you sure you want to delete <strong>{deleteUser?.email}</strong>? 
-              This action cannot be undone.
+              Are you sure you want to delete{" "}
+              <strong>{deleteUser?.email}</strong>? This action cannot be
+              undone.
             </p>
             <div className="flex justify-center gap-4">
-              <Button 
-                color="failure" 
+              <Button
+                color="failure"
                 onClick={deleteUserHandler}
                 className="bg-red-600 hover:bg-red-700"
               >
                 Yes, Delete User
               </Button>
-              <Button 
-                color="gray" 
+              <Button
+                color="gray"
                 onClick={() => setOpenModal(false)}
                 className="bg-gray-200 hover:bg-gray-300 text-gray-800"
               >

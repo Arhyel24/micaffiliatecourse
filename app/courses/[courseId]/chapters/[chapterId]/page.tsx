@@ -7,11 +7,11 @@ import { Preview } from "@/components/preview";
 import { Separator } from "@/components/ui/separator";
 import { CourseProgressButton } from "./_components/course-progress-button";
 import { ChapterVideo } from "./_components/chapter-video";
-import { 
-  BookOpen, 
-  Clock, 
-  CheckCircle, 
-  ArrowLeft, 
+import {
+  BookOpen,
+  Clock,
+  CheckCircle,
+  ArrowLeft,
   ArrowRight,
   Play,
   Users,
@@ -19,7 +19,7 @@ import {
   Award,
   Star,
   Target,
-  TrendingUp
+  TrendingUp,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -73,7 +73,7 @@ export default function ChapterDetailsPage() {
 
   if (!chapter || !course) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center pt-20">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             Chapter Not Found
@@ -92,18 +92,21 @@ export default function ChapterDetailsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-16">
       {/* Breadcrumb */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-16 z-30">
+      <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-16 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <nav className="flex items-center space-x-2 text-sm">
-            <Link href="/courses" className="text-blue-600 hover:text-blue-700 flex items-center">
+            <Link
+              href="/courses"
+              className="text-blue-600 hover:text-blue-700 flex items-center"
+            >
               <BookOpen className="w-4 h-4 mr-1" />
               Courses
             </Link>
             <span className="text-gray-400">/</span>
-            <Link 
-              href={`/courses/${courseId}`} 
+            <Link
+              href={`/courses/${courseId}`}
               className="text-blue-600 hover:text-blue-700 truncate max-w-xs"
             >
               {course.title}
@@ -125,7 +128,7 @@ export default function ChapterDetailsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
+              className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
             >
               <ChapterVideo videoUrl={chapter.videoUrl} title={chapter.title} />
             </motion.div>
@@ -135,7 +138,7 @@ export default function ChapterDetailsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-8"
+              className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-8"
             >
               {/* Header */}
               <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
@@ -151,10 +154,6 @@ export default function ChapterDetailsPage() {
                     <div className="flex items-center">
                       <Play className="w-4 h-4 mr-1" />
                       <span>Interactive Content</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Users className="w-4 h-4 mr-1" />
-                      <span>10,000+ Students</span>
                     </div>
                   </div>
                 </div>
@@ -189,9 +188,10 @@ export default function ChapterDetailsPage() {
                     🎉 Congratulations!
                   </h2>
                   <p className="text-lg text-gray-700 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-                    You've successfully completed the entire course! You're now equipped with 
-                    the knowledge and skills to succeed. Join our exclusive community to 
-                    continue your journey and connect with fellow graduates.
+                    You've successfully completed the entire course! You're now
+                    equipped with the knowledge and skills to succeed. Join our
+                    exclusive community to continue your journey and connect
+                    with fellow graduates.
                   </p>
                   <motion.a
                     href="https://chat.whatsapp.com/GtTnMNigNg0IoQB7gk7Cya"
@@ -215,7 +215,7 @@ export default function ChapterDetailsPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 sticky top-24 space-y-6"
+              className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 sticky top-24 space-y-6"
             >
               {/* Course Progress */}
               <div>
@@ -224,7 +224,7 @@ export default function ChapterDetailsPage() {
                   Your Progress
                 </h3>
                 <div className="bg-gray-100 dark:bg-gray-700 rounded-full h-3 mb-3">
-                  <div 
+                  <div
                     className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-300"
                     style={{ width: `${Math.random() * 100}%` }}
                   ></div>
@@ -236,43 +236,13 @@ export default function ChapterDetailsPage() {
 
               <Separator />
 
-              {/* Course Stats */}
-              <div className="space-y-4">
-                <h4 className="font-semibold text-gray-900 dark:text-white">Course Stats</h4>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <Users className="w-4 h-4 text-blue-500 mr-2" />
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Students</span>
-                    </div>
-                    <span className="text-sm font-semibold text-gray-900 dark:text-white">10,000+</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Completion Rate</span>
-                    </div>
-                    <span className="text-sm font-semibold text-gray-900 dark:text-white">95%</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <Star className="w-4 h-4 text-yellow-500 mr-2" />
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Rating</span>
-                    </div>
-                    <span className="text-sm font-semibold text-gray-900 dark:text-white">4.9/5</span>
-                  </div>
-                </div>
-              </div>
-
-              <Separator />
-
               {/* Navigation */}
-              <div className="space-y-3">
+              <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
                 <Link href={`/courses/${courseId}`}>
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full flex items-center justify-center bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium py-3 px-4 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    className="w-full sm:w-auto flex items-center justify-center bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium py-3 px-4 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to Course
@@ -284,7 +254,7 @@ export default function ChapterDetailsPage() {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-4 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+                      className="w-full sm:w-auto flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-4 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
                     >
                       Next Chapter
                       <ArrowRight className="w-4 h-4 ml-2" />
@@ -300,7 +270,8 @@ export default function ChapterDetailsPage() {
                   Need Help?
                 </h4>
                 <p className="text-xs text-blue-700 dark:text-blue-400 mb-3">
-                  Join our community for support and discussions with fellow students.
+                  Join our community for support and discussions with fellow
+                  students.
                 </p>
                 <a
                   href="https://chat.whatsapp.com/GtTnMNigNg0IoQB7gk7Cya"

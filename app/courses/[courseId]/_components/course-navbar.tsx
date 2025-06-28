@@ -6,15 +6,13 @@ import { BookOpen, Users, Award } from "lucide-react";
 
 type CourseNavbarProps = { progressCount: number };
 
-export default function CourseNavbar({
-  progressCount,
-}: CourseNavbarProps) {
+export default function CourseNavbar({ progressCount }: CourseNavbarProps) {
   return (
-    <div className="flex h-full items-center justify-between bg-white dark:bg-gray-800 px-4 shadow-sm">
+    <div className="flex h-full items-center justify-between bg-white dark:bg-gray-900 px-4 shadow-sm">
       {/* Left side - Mobile sidebar and logo */}
       <div className="flex items-center space-x-4">
         <CourseMobileSidebar progressCount={progressCount} />
-        
+
         {/* Course Logo/Brand */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}

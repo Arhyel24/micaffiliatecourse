@@ -5,18 +5,18 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { 
-  ChevronDown, 
-  ChevronUp, 
-  Play, 
-  Clock, 
-  Users, 
-  Star, 
-  CheckCircle, 
+import {
+  ChevronDown,
+  ChevronUp,
+  Play,
+  Clock,
+  Users,
+  Star,
+  CheckCircle,
   BookOpen,
   Award,
   TrendingUp,
-  Target
+  Target,
 } from "lucide-react";
 import { NavBar } from "@/components/navbar";
 import { MyFooter } from "@/components/footer";
@@ -77,7 +77,9 @@ export default function CourseIdPage() {
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20 flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-400">Loading course...</p>
+            <p className="text-gray-600 dark:text-gray-400">
+              Loading course...
+            </p>
           </div>
         </div>
       </>
@@ -86,38 +88,42 @@ export default function CourseIdPage() {
 
   if (!course) return null;
 
-  const visibleChapters = showAllChapters ? course.chapters : course.chapters.slice(0, 5);
-  
+  const visibleChapters = showAllChapters
+    ? course.chapters
+    : course.chapters.slice(0, 5);
+
   const benefits = [
     "Lifetime access to all course materials",
     "Step-by-step video tutorials",
     "Downloadable resources and templates",
     "Access to exclusive community",
     "Certificate of completion",
-    "30-day money-back guarantee"
+    "30-day money-back guarantee",
   ];
 
   const features = [
     {
       icon: BookOpen,
       title: "Comprehensive Content",
-      description: `${course.chapters.length} detailed chapters covering everything you need to know`
+      description: `${course.chapters.length} detailed chapters covering everything you need to know`,
     },
     {
       icon: Play,
       title: "Video Lessons",
-      description: "High-quality video content with practical demonstrations"
+      description: "High-quality video content with practical demonstrations",
     },
     {
       icon: Users,
       title: "Community Access",
-      description: "Join thousands of students in our exclusive learning community"
+      description:
+        "Join thousands of students in our exclusive learning community",
     },
     {
       icon: Award,
       title: "Expert Instruction",
-      description: "Learn from Coach Adams, a proven expert with 5+ years experience"
-    }
+      description:
+        "Learn from Coach Adams, a proven expert with 5+ years experience",
+    },
   ];
 
   return (
@@ -172,7 +178,9 @@ export default function CourseIdPage() {
                 >
                   <div className="flex items-center">
                     <BookOpen className="w-5 h-5 text-blue-300 mr-2" />
-                    <span className="text-blue-100">{course.chapters.length} Chapters</span>
+                    <span className="text-blue-100">
+                      {course.chapters.length} Chapters
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <Clock className="w-5 h-5 text-blue-300 mr-2" />
@@ -190,7 +198,9 @@ export default function CourseIdPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <Link href={`/courses/${course._id}/chapters/${course.chapters[0]._id}`}>
+                  <Link
+                    href={`/courses/${course._id}/chapters/${course.chapters[0]._id}`}
+                  >
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -232,17 +242,24 @@ export default function CourseIdPage() {
                       </motion.div>
                     </div>
                   </div>
-                  
+
                   {/* Course Info Card */}
                   <div className="mt-6 bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
                     <div className="flex items-center justify-between">
                       <div>
-                        <div className="text-white font-semibold">Course Rating</div>
+                        <div className="text-white font-semibold">
+                          Course Rating
+                        </div>
                         <div className="flex items-center">
                           {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                            <Star
+                              key={i}
+                              className="w-4 h-4 text-yellow-400 fill-current"
+                            />
                           ))}
-                          <span className="text-blue-100 ml-2">4.9 (2,500+ reviews)</span>
+                          <span className="text-blue-100 ml-2">
+                            4.9 (2,500+ reviews)
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -267,8 +284,8 @@ export default function CourseIdPage() {
                 Why Choose This Course?
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                This comprehensive course is designed to take you from beginner to expert 
-                with proven strategies and hands-on learning.
+                This comprehensive course is designed to take you from beginner
+                to expert with proven strategies and hands-on learning.
               </p>
             </motion.div>
 
@@ -298,7 +315,7 @@ export default function CourseIdPage() {
         </section>
 
         {/* Course Content Section */}
-        <section className="py-20 bg-gray-50 dark:bg-gray-800">
+        <section className="py-20 bg-gray-50 dark:bg-gray-900">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -311,7 +328,8 @@ export default function CourseIdPage() {
                 Course Content
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-300">
-                {course.chapters.length} comprehensive chapters designed to transform your skills
+                {course.chapters.length} comprehensive chapters designed to
+                transform your skills
               </p>
             </motion.div>
 
@@ -327,7 +345,7 @@ export default function CourseIdPage() {
                   Chapters ({course.chapters.length})
                 </h3>
               </div>
-              
+
               <div className="divide-y divide-gray-200 dark:divide-gray-700">
                 {visibleChapters.map((chapter, index) => (
                   <motion.div
@@ -336,21 +354,25 @@ export default function CourseIdPage() {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
                     viewport={{ once: true }}
-                    className="p-6 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                    className="p-6 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
                   >
-                    <Link href={`/courses/${course._id}/chapters/${chapter._id}`}><div className="flex items-center">
-                      <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
-                        <span className="text-blue-600 dark:text-blue-400 font-semibold text-sm">
-                          {index + 1}
-                        </span>
+                    <Link
+                      href={`/courses/${course._id}/chapters/${chapter._id}`}
+                    >
+                      <div className="flex items-center">
+                        <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
+                          <span className="text-blue-600 dark:text-blue-400 font-semibold text-sm">
+                            {index + 1}
+                          </span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                            {chapter.title}
+                          </h4>
+                        </div>
+                        <Play className="w-5 h-5 text-gray-400" />
                       </div>
-                      <div className="flex-1">
-                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                          {chapter.title}
-                        </h4>
-                      </div>
-                      <Play className="w-5 h-5 text-gray-400" />
-                    </div></Link>
+                    </Link>
                   </motion.div>
                 ))}
               </div>
@@ -392,10 +414,10 @@ export default function CourseIdPage() {
                   What You'll Get
                 </h2>
                 <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-                  This course includes everything you need to succeed, with lifetime access 
-                  and ongoing support from our community.
+                  This course includes everything you need to succeed, with
+                  lifetime access and ongoing support from our community.
                 </p>
-                
+
                 <div className="space-y-4">
                   {benefits.map((benefit, index) => (
                     <motion.div
@@ -407,7 +429,9 @@ export default function CourseIdPage() {
                       className="flex items-center"
                     >
                       <CheckCircle className="w-6 h-6 text-green-500 mr-3 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">{benefit}</span>
+                      <span className="text-gray-700 dark:text-gray-300">
+                        {benefit}
+                      </span>
                     </motion.div>
                   ))}
                 </div>
@@ -421,12 +445,16 @@ export default function CourseIdPage() {
                 className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl p-8 text-white text-center"
               >
                 <TrendingUp className="w-16 h-16 mx-auto mb-6" />
-                <h3 className="text-2xl font-bold mb-4">Start Your Success Journey</h3>
+                <h3 className="text-2xl font-bold mb-4">
+                  Start Your Success Journey
+                </h3>
                 <p className="text-blue-100 mb-6">
-                  Join thousands of successful students who have transformed their lives 
-                  with this course.
+                  Join thousands of successful students who have transformed
+                  their lives with this course.
                 </p>
-                <Link href={`/courses/${course._id}/chapters/${course.chapters[0]._id}`}>
+                <Link
+                  href={`/courses/${course._id}/chapters/${course.chapters[0]._id}`}
+                >
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

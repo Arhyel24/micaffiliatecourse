@@ -6,7 +6,7 @@ const Sidebar = () => {
     <div
       className="flex h-full flex-col overflow-y-auto 
   border-r border-gray-200 dark:border-gray-700 
-  bg-white dark:bg-gray-800 
+  bg-white dark:bg-gray-900 
   shadow-sm dark:shadow-md"
     >
       <div className="p-6">

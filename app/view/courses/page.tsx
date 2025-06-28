@@ -8,7 +8,7 @@ const ComingSoon = () => {
       <p className="text-lg text-gray-600">
         In the meantime, you can visit our{' '}
         <Link href="/">
-          <a className="text-blue-600 hover:text-blue-800">home page</a>
+          <p className="text-blue-600 hover:text-blue-800">home page</p>
         </Link>{' '}
         for more information.
       </p>

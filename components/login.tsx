@@ -43,7 +43,8 @@ const LoginForm = () => {
       toast.success("Welcome back! Login successful.");
       router.replace("/");
     } catch (error) {
-      const errorMessage = (error as Error).message || "An unexpected error occurred";
+      const errorMessage =
+        (error as Error).message || "An unexpected error occurred";
       setError(errorMessage);
       toast.error(errorMessage);
       console.error("Login error:", error);
@@ -60,7 +61,7 @@ const LoginForm = () => {
         transition={{ duration: 0.5 }}
         className="w-full max-w-md"
       >
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-8">
+        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-8">
           {/* Header */}
           <div className="text-center mb-8">
             <motion.div
@@ -82,7 +83,10 @@ const LoginForm = () => {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >
                 Email Address
               </label>
               <input
@@ -101,7 +105,10 @@ const LoginForm = () => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >
                 Password
               </label>
               <div className="relative">
@@ -136,8 +143,13 @@ const LoginForm = () => {
                 className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4"
               >
                 <div className="flex items-center">
-                  <HiInformationCircle className="text-red-500 mr-2" size={20} />
-                  <span className="text-red-700 dark:text-red-400 text-sm">{error}</span>
+                  <HiInformationCircle
+                    className="text-red-500 mr-2"
+                    size={20}
+                  />
+                  <span className="text-red-700 dark:text-red-400 text-sm">
+                    {error}
+                  </span>
                 </div>
               </motion.div>
             )}
