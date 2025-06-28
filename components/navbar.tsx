@@ -41,7 +41,6 @@ export function NavBar() {
 
   const adminItems = [
     { href: "/view/admin", label: "Manage Users", icon: Users },
-    { href: "/view/courses", label: "Course Analytics", icon: BarChart3 },
   ];
 
   return (
@@ -153,7 +152,7 @@ export function NavBar() {
                       {session?.user?.email}
                     </span>
                   </Dropdown.Header>
-                  
+
                   <Dropdown.Divider />
                   <Dropdown.Item href="/user/profile" icon={Settings}>
                     Profile Settings
