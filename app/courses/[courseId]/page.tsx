@@ -338,7 +338,7 @@ export default function CourseIdPage() {
                     viewport={{ once: true }}
                     className="p-6 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                   >
-                    <div className="flex items-center">
+                    <Link href={`/courses/${course._id}/chapters/${chapter._id}`}><div className="flex items-center">
                       <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
                         <span className="text-blue-600 dark:text-blue-400 font-semibold text-sm">
                           {index + 1}
@@ -350,7 +350,7 @@ export default function CourseIdPage() {
                         </h4>
                       </div>
                       <Play className="w-5 h-5 text-gray-400" />
-                    </div>
+                    </div></Link>
                   </motion.div>
                 ))}
               </div>

@@ -66,7 +66,7 @@ export function UsersTable({ users }) {
 
   return (
     <>
-      <div className="overflow-x-auto pt-4">
+      <div className="overflow-x-auto p-4">
         <TextInput
           type="text"
           placeholder="Search by name or email..."
@@ -146,7 +146,7 @@ export function UsersTable({ users }) {
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex justify-between items-center mt-4 px-4">
+      <div className="flex justify-between items-center mt-4 p-4">
         <Button
           disabled={currentPage === 1}
           onClick={() => setCurrentPage(currentPage - 1)}

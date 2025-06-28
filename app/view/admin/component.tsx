@@ -149,7 +149,7 @@ export default function AdminComponent() {
   return (
     <>
       <Suspense>
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
