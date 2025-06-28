@@ -53,7 +53,7 @@ export function ChapterVideo({
       />
 
       {/* Video Info Overlay */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: showControls ? 1 : 0, y: showControls ? 0 : 20 }}
         className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -75,7 +75,7 @@ export function ChapterVideo({
             <span>Fullscreen</span>
           </div>
         </div>
-      </motion.div>
+      </motion.div> */}
 
       {/* Quality Badge */}
       <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-lg px-3 py-1">
