@@ -1,61 +1,118 @@
 "use client";
 
-import { PlayCircleIcon } from "lucide-react";
+import { PlayCircleIcon, CheckCircle, Lock } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 type CourseSidebarItemProps = {
   id: string;
   label: string | null;
   courseId: string;
+  index: number;
+  isCompleted?: boolean;
+  isLocked?: boolean;
 };
 
 export default function CourseSidebarItem({
   id,
   label,
   courseId,
+  index,
+  isCompleted = false,
+  isLocked = false,
 }: CourseSidebarItemProps) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const Icon = PlayCircleIcon;
-
   const isActive = pathname?.includes(id);
 
   const onClick = () => {
-    router.push(`/courses/${courseId}/chapters/${id}`);
+    if (!isLocked) {
+      router.push(`/courses/${courseId}/chapters/${id}`);
+    }
   };
 
+  const getIcon = () => {
+    if (isCompleted) return CheckCircle;
+    if (isLocked) return Lock;
+    return PlayCircleIcon;
+  };
+
+  const Icon = getIcon();
+
   return (
-    <button
+    <motion.button
       onClick={onClick}
+      disabled={isLocked}
       type="button"
+      whileHover={!isLocked ? { x: 4 } : {}}
+      whileTap={!isLocked ? { scale: 0.98 } : {}}
       className={cn(
-        "flex items-center gap-x-2 pl-6 text-sm font-medium transition-all",
+        "flex items-center w-full p-4 text-left transition-all duration-200 border-l-4 hover:bg-gray-50 dark:hover:bg-gray-700/50",
         isActive
-          ? "bg-slate-300/20 text-slate-700 dark:bg-slate-600/20 dark:text-slate-200"
-          : "text-slate-500 hover:bg-slate-300/20 hover:text-slate-600 dark:text-slate-400 hover:dark:bg-slate-600/20 hover:dark:text-slate-200"
+          ? "bg-blue-50 dark:bg-blue-900/20 border-l-blue-500 text-blue-700 dark:text-blue-300"
+          : "border-l-transparent text-gray-700 dark:text-gray-300",
+        isLocked && "opacity-60 cursor-not-allowed",
+        isCompleted && !isActive && "bg-green-50 dark:bg-green-900/20 border-l-green-500"
       )}
     >
-      <div className="flex items-center gap-x-2 py-4 flex-grow"> {/* Added flex-grow to take available space */}
-        <Icon
-          size={22}
-          className={cn("transition-colors", {
-            "text-slate-700 dark:text-slate-200": isActive,
-            "text-slate-500 dark:text-slate-400": !isActive,
-          })}
-        />
-        <span className="text-left">{label}</span> {/* Ensure label is aligned left */}
-      </div>
-  
-      <div
-        className={cn(
-          "h-full border-2 transition-all",
-          isActive
-            ? "border-slate-700 dark:border-slate-200 opacity-100"
-            : "border-transparent opacity-0"
+      {/* Chapter Number */}
+      <div className={cn(
+        "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold mr-3",
+        isActive
+          ? "bg-blue-500 text-white"
+          : isCompleted
+          ? "bg-green-500 text-white"
+          : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+      )}>
+        {isCompleted ? (
+          <CheckCircle className="w-4 h-4" />
+        ) : (
+          <span>{index}</span>
         )}
-      />
-    </button>
+      </div>
+
+      {/* Chapter Content */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center justify-between">
+          <h4 className={cn(
+            "text-sm font-medium line-clamp-2 leading-tight",
+            isActive && "text-blue-700 dark:text-blue-300",
+            isCompleted && !isActive && "text-green-700 dark:text-green-300"
+          )}>
+            {label}
+          </h4>
+          <Icon className={cn(
+            "w-4 h-4 ml-2 flex-shrink-0",
+            isActive && "text-blue-500",
+            isCompleted && "text-green-500",
+            isLocked && "text-gray-400"
+          )} />
+        </div>
+        
+        {/* Chapter Status */}
+        <div className="flex items-center mt-1">
+          <span className={cn(
+            "text-xs",
+            isActive && "text-blue-600 dark:text-blue-400",
+            isCompleted && !isActive && "text-green-600 dark:text-green-400",
+            !isActive && !isCompleted && "text-gray-500 dark:text-gray-400"
+          )}>
+            {isCompleted ? "Completed" : isLocked ? "Locked" : "Available"}
+          </span>
+        </div>
+      </div>
+
+      {/* Active Indicator */}
+      {isActive && (
+        <motion.div
+          layoutId="activeChapter"
+          className="absolute right-0 top-0 bottom-0 w-1 bg-blue-500 rounded-l-full"
+          initial={false}
+          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+        />
+      )}
+    </motion.button>
   );
 }

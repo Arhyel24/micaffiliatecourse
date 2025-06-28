@@ -41,22 +41,38 @@ export default function CourseShell({
     fetchCourse();
   }, [courseId, router]);
 
-  if (loading || !course) return null;
+  if (loading || !course) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Loading course...</p>
+        </div>
+      </div>
+    );
+  }
 
   const progressCount = Math.floor(Math.random() * 100);
 
   return (
-    <div className="h-full bg-white dark:bg-gray-900">
-      <div className="fixed inset-y-0 z-50 h-20 w-full md:pl-80 bg-white dark:bg-gray-800">
-        <CourseNavbar progressCount={progressCount} />
+    <div className="h-screen bg-gray-50 dark:bg-gray-900 overflow-hidden">
+      {/* Course Navbar - Fixed at top */}
+      <div className="fixed inset-x-0 top-0 z-50 h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+        <div className="h-full md:pl-80">
+          <CourseNavbar progressCount={progressCount} />
+        </div>
       </div>
 
-      <div className="fixed inset-y-0 z-50 hidden h-full w-80 flex-col md:flex bg-white dark:bg-gray-800">
+      {/* Course Sidebar - Fixed on left */}
+      <div className="fixed inset-y-0 left-0 z-40 w-80 hidden md:flex">
         <CourseSidebar progressCount={progressCount} />
       </div>
 
-      <main className="h-full md:pl-80 bg-gray-100 dark:bg-gray-900">
-        {children}
+      {/* Main Content Area */}
+      <main className="h-full pt-16 md:pl-80 overflow-auto">
+        <div className="h-full">
+          {children}
+        </div>
       </main>
     </div>
   );
