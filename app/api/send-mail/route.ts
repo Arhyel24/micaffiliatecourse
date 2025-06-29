@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
       from: `"MIC Affiliate Course" <${process.env.ZOHO_USER}>`,
       to: email,
       subject: "Your Login Details - Affiliate Marketing Program",
-      text: `Thanks for registering! Here are your temporary login details:\nEmail: ${email}\nPassword: 12345678\n\nLog in here: ${process.env.NEXTAUTH_URL}login\n\nPlease update your password after logging in.\n\nBest,\nCoach Adams`,
+      text: `Thanks for registering! Here are your temporary login details:\nEmail: ${email}\nPassword: 12345678\n\nLog in here: ${process.env.NEXTAUTH_URL}/login\n\nPlease update your password after logging in.\n\nBest,\nCoach Adams`,
       html: `
     <html>
   <body style="font-family: Arial, sans-serif; background-color: #f7fafc; padding: 5px;">
