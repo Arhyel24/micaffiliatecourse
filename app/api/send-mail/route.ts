@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
         </div>
         <p style="font-size: 16px; color: #555;">Click below to log in and start your journey:</p>
         <p style="text-align: center;">
-          <a href="${process.env.NEXTAUTH_URL}login" style="background: #8B0000; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px; display: inline-block;">Log in to Your Account</a>
+          <a href="${process.env.NEXTAUTH_URL}/login" style="background: #8B0000; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px; display: inline-block;">Log in to Your Account</a>
         </p>
         <p style="font-size: 16px; color: #555;"><strong>Important:</strong> For security reasons, please change your password after logging in.</p>
         <p style="font-size: 16px; color: #555;">Looking forward to seeing your success!</p>
